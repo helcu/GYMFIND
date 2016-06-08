@@ -1,0 +1,89 @@
+/* ==========================================================================
+   Red styles
+   ========================================================================== */
+.color {
+  color: #f97a87;
+}
+
+.color-bg {
+  background: #f97a87;
+}
+
+.more {
+  color: #f97a87;
+}
+
+.more:hover {
+  color: #d65e6a;
+  text-decoration: none;
+}
+
+.hr-color {
+  background: none repeat scroll 0 0 #f97a87;
+  border: 0 none;
+  height: 2px;
+  width: 50px;
+  text-align: left;
+  margin-left: 0px;
+
+}
+
+/* --------------- Buttons ----------------- */
+
+.btn-secondary {
+  background-color: #f97a87;
+  border-color: rgba(0, 0, 0, 0);
+  color: #FFFFFF;
+}
+
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary:active, .btn-secondary.active {
+  background-color: #d65e6a;
+  border-color: transparent;
+  color: #FFFFFF;
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+
+/* --------------- Latest Work Icons ----------------- */
+.thumbs a {
+	background-color: rgba(250,122,135,0.90);
+}
+
+
+.option-set > li:hover {
+    background: none repeat scroll 0 0 #f97a87;
+    color: #FFFFFF;
+}
+
+
+/* --------------- Latest News ----------------- */
+.news-item {
+  background: #f97a87;
+}
+
+.news-item:hover {
+  background: #d65e6a;
+  -webkit-transition: all 0.35s ease-in-out;
+  -moz-transition: all 0.35s ease-in-out;
+  -o-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+
+/* --------------- Pricing Tables ----------------- */
+.pricing-table.active .headline {
+  background: #f97a87;
+}
+
+/* --------------- Social Icons ----------------- */
+.social li a {
+  background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+  border-radius: 30px;
+  border: 2px solid #f97a87;
+  color: #f97a87;
+}
+
+
+
