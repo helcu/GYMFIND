@@ -33,5 +33,11 @@ namespace GYMFIND.Controllers
             return View();
 
         }
+
+        public ActionResult dashboard() {
+
+
+            return View();
+        }
     }
 }
