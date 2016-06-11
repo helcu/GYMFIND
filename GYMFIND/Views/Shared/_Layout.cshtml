@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Gentallela Alela! | </title>
+    <title>@ViewBag.title </title>
     <!-- Bootstrap core CSS -->
     <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
     <link href="@Url.Content("~/Content/fonts/css/font-awesome.min.css")" rel="stylesheet">
@@ -35,17 +35,17 @@
             <div class="col-md-3 left_col">
                 <div class="left_col scroll-view">
                     <div class="navbar nav_title" style="border: 0;">
-                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>Gentellela Alela!</span></a>
+                        <a href="index.html" class="site_title"><i class="fa fa-paw"></i> <span>GYMFIND</span></a>
                     </div>
                     <div class="clearfix"></div>
                     <!-- menu prile quick info -->
                     <div class="profile">
                         <div class="profile_pic">
-                            <img src="images/img.jpg" alt="..." class="img-circle profile_img">
+                            <img src="@Url.Content("~/Content/images/img.jpg")" alt="..." class="img-circle profile_img">
                         </div>
                         <div class="profile_info">
-                            <span>Welcome,</span>
-                            <h2>John Doe</h2>
+                            <span>Bienvenido</span>
+                            <h2>Helmut</h2>
                         </div>
                     </div>
                     <!-- /menu prile quick info -->
@@ -56,8 +56,8 @@
                             <h3>General</h3>
                             <ul class="nav side-menu">
                                 <li>
-                                    <a><i class="fa fa-home"></i> Home <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
+                                    <a><i class="fa fa-home"></i> Gimnacios <span class="fa fa-chevron-down"></span></a>
+                                    @*<ul class="nav child_menu" style="display: none">
                                         <li>
                                             <a href="index.html">Dashboard</a>
                                         </li>
@@ -67,11 +67,11 @@
                                         <li>
                                             <a href="index3.html">Dashboard3</a>
                                         </li>
-                                    </ul>
+                                    </ul>*@
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-edit"></i> Forms <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
+                                    <a><i class="fa fa-edit"></i> Planes y ofertas <span class="fa fa-chevron-down"></span></a>
+                                    @*<ul class="nav child_menu" style="display: none">
                                         <li>
                                             <a href="form.html">General Form</a>
                                         </li>
@@ -90,11 +90,11 @@
                                         <li>
                                             <a href="form_buttons.html">Form Buttons</a>
                                         </li>
-                                    </ul>
+                                    </ul>*@
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-desktop"></i> UI Elements <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
+                                    <a><i class="fa fa-desktop"></i> Planes adquiridos <span class="fa fa-chevron-down"></span></a>
+                                    @*<ul class="nav child_menu" style="display: none">
                                         <li>
                                             <a href="general_elements.html">General Elements</a>
                                         </li>
@@ -122,22 +122,22 @@
                                         <li>
                                             <a href="calender.html">Calender</a>
                                         </li>
+                                    </ul>*@
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-table"></i>Administrar Planes <span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu" style="display: none">
+                                        <li>
+                                            <a href="tables.html">Registrar</a>
+                                        </li>
+                                        <li>
+                                            <a href="tables_dynamic.html">Editar</a>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-table"></i> Tables <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
-                                        <li>
-                                            <a href="tables.html">Tables</a>
-                                        </li>
-                                        <li>
-                                            <a href="tables_dynamic.html">Table Dynamic</a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a><i class="fa fa-bar-chart-o"></i> Data Presentation <span class="fa fa-chevron-down"></span></a>
-                                    <ul class="nav child_menu" style="display: none">
+                                    <a><i class="fa fa-bar-chart-o"></i> Estado de Cuenta <span class="fa fa-chevron-down"></span></a>
+                                    @*<ul class="nav child_menu" style="display: none">
                                         <li>
                                             <a href="chartjs.html">Chart JS</a>
                                         </li>
@@ -153,11 +153,11 @@
                                         <li>
                                             <a href="other_charts.html">Other Charts </a>
                                         </li>
-                                    </ul>
+                                    </ul>*@
                                 </li>
                             </ul>
                         </div>
-                        <div class="menu_section">
+                        @*<div class="menu_section">
                             <h3>Live On</h3>
                             <ul class="nav side-menu">
                                 <li>
@@ -204,7 +204,7 @@
                                     <a><i class="fa fa-laptop"></i> Landing Page <span class="label label-success pull-right">Coming Soon</span></a>
                                 </li>
                             </ul>
-                        </div>
+                        </div>*@
                     </div>
                     <!-- /sidebar menu -->
                     <!-- /menu footer buttons -->
@@ -218,7 +218,7 @@
                         <a data-toggle="tooltip" data-placement="top" title="Lock">
                             <span class="glyphicon glyphicon-eye-close" aria-hidden="true"></span>
                         </a>
-                        <a data-toggle="tooltip" data-placement="top" title="Logout">
+                        <a data-toggle="tooltip" data-placement="top" title="Cerrar sesion">
                             <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
                         </a>
                     </div>
@@ -344,7 +344,7 @@
                 <footer>
                     <div class="copyright-info">
                         <p class="pull-right">
-                            Gentelella - Bootstrap Admin Template by <a href="https://colorlib.com">Colorlib</a>
+                            GYMFIND - Luminous Group
                         </p>
                     </div>
                     <div class="clearfix"></div>
