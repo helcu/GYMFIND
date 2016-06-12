@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GYMFIND.ViewModel;
+using GYMFIND.Models;
 
 namespace GYMFIND.Controllers
 {
@@ -38,6 +40,25 @@ namespace GYMFIND.Controllers
 
 
             return View();
+        }
+        [HttpPost]
+        public ActionResult registrarUsuario(VmLogin vmLogin)
+        {
+            try
+            {
+                //Cliente cliente = 
+
+
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            
         }
     }
 }

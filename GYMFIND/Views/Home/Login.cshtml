@@ -1,4 +1,6 @@
 ﻿
+@model GYMFIND.ViewModel.VmLogin
+
 @{
     ViewBag.Title = "Login";
     Layout = null;
@@ -6,257 +8,159 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<!-- Mirrored from www.themearmada.com/demos/boxia/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Jun 2016 14:45:19 GMT -->
 <head>
     <meta charset="utf-8">
-    <title>GYMFIND</title>
-    <meta name="keywords" content="">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-    <meta property="og:title" content="">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="">
-    <meta property="og:site_name" content="">
-    <meta property="og:description" content="">
-    <!-- Styles -->
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/font-awesome.min.css")">
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/animate.css")">
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/bootstrap.min.css")">
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/main.css")">
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/colors/green.css")"><!--Replace Your Color-->
-    <link rel="stylesheet" href="@Url.Content("~/Content/css/custom-styles.css")">
-
-    <!-- Switcher Only -->
-    <link rel="stylesheet" id="switcher-css" type="text/css" href="@Url.Content("~/Content/css/switcher.css")" media="all" />
-    <!-- END Switcher Styles -->
-    <!-- Demo Examples -->
-    <link rel="alternate stylesheet" type="text/css" href="@Url.Content("~/Content/css/colors/blue.css")" title="blue" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="@Url.Content("~/Content/css/colors/green.css")" title="green" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="@Url.Content("~/Content/css/colors/orange.css")" title="orange" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="@Url.Content("~/Content/css/colors/pink.css")" title="pink" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="@Url.Content("~/Content/css/colors/purple.css")" title="purple" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="@Url.Content("~/Content/css/colors/red.css")" title="red" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="@Url.Content("~/Content/css/colors/teal.css")" title="teal" media="all" />
-    <link rel="alternate stylesheet" type="text/css" href="@Url.Content("~/Content/css/colors/yellow.css")" title="yellow" media="all" />
-    <!-- END Demo Examples -->
-    <script src="@Url.Content("~/Content/js/modernizr-2.7.1.js")"></script>
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../../apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../../apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../../apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="../../apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="http://www.themearmada.com/favicon.ico">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>GYMFIND - Login</title>
+    <!-- CSS -->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:400,100,300,500">
+    <link rel="stylesheet" href="@Url.Content("~/Content/bootstrap/css/bootstrap.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/font-awesome/css/font-awesome.min.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/form-elements.css")">
+    <link rel="stylesheet" href="@Url.Content("~/Content/css/style.css")">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <!-- Favicon and touch icons -->
+    <link rel="shortcut icon" href="@Url.Content("~/Content/assets/ico/favicon.png")">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="@Url.Content("~/Content/ico/apple-touch-icon-144-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="@Url.Content("~/Content/ico/apple-touch-icon-114-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="@Url.Content("~/Content/ico/apple-touch-icon-72-precomposed.png")">
+    <link rel="apple-touch-icon-precomposed" href="@Url.Content("~/Content/ico/apple-touch-icon-57-precomposed.png")">
 </head>
-<body id="top">
+<body>
+    <!-- Top content -->
+    <div class="top-content">
 
-    <div class="wrapper">
-
-
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="index.html"><img src="@Url.Content("~/Content/img/logo.png")" alt="Boxia Logo"></a>
-                </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="index.html#services">Services</a></li>
-                        <li><a href="index.html#work">Work</a></li>
-                        <li><a href="index.html#about">About</a></li>
-                        <li><a href="index.html#news">News</a></li>
-                        <li><a href="index.html#pricing">Pricing</a></li>
-                        <li><a href="index.html#contact">Contact</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="individual-work.html">Individual Work</a></li>
-                                <li><a href="pricing.html">Pricing</a></li>
-                                <li><a href="full-width.html">Full Width</a></li>
-                                <li><a href="login.html">Login</a></li>
-                                <li><a href="signup.html">Sign Up</a></li>
-                            </ul>
-                        </li>
-                    </ul>
-                </div><!--/.navbar-collapse -->
-            </div>
-        </div>
-
-
-        <!--Login-->
-        <section class="white-bg top">
+        <div class="inner-bg">
             <div class="container">
 
-                <!--Brand-->
-                <div class="row margin-100">
-                    <div class="col-sm-12">
-                        <a href="index.html"><img src="@Url.Content("~/Content/img/logo.png")" alt="Boxia Logo"></a>
-                    </div>
-                </div>
 
-                <div class="row margin-50">
-
-                    <div class="col-sm-6 col-sm-offset-3 text-center">
-                        <h3>Ingresar con:</h3><br />
-
-                        <ul class="list-inline margin-40">
-                            @*<li><a class="twitter" href="#" target="_blank"><i class="fa fa-twitter fa-4x color"></i></a></li>*@
-                            <li><a class="facebook" href="#" target="_blank"><i class="fa fa-facebook fa-4x color"></i></a></li>
-                            
-                            <li><a class="google" href="#" target="_blank"><i class="fa fa-google-plus fa-4x color"></i></a></li>
-                        </ul>
-
-                        <div class="col-sm-6 col-sm-offset-3 text-center">
-                            <h3>O</h3><br />
-                        </div>
-                            <form role="form" id="signup">
-                                <div class="form-group">
-                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Usuario">
-                                </div>
-                                <div class="form-group">
-                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
-                                </div>
-                                <br />
-                                <div>
-                                    <button type="submit" class="btn btn-secondary btn-lg">Ingresar</button>
-                                </div>
-                                <a href="@Url.Action("dashboard")"><small>¿Nesecitas una cuenta?</small></a>
-                            </form>
-
-                        </div><!--End Span6-->
-
-                </div>
-            </div>
-        </section>
-
-
-
-        <!--Footer-->
-        <section id="contact" class="black-bg">
-            <div class="container">
-                <div class="row margin-60">
-                    <div class="col-sm-12 text-center">
-                        <h2 class="white">Contact Us</h2>
-                    </div>
-                </div>
-
-                <div class="row margin-80">
-                    <div class="col-sm-8">
-                        <h3 class="white">Get In Touch</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                        <br />
-                        <!-- comment form -->
-                        <form method="post" action="http://www.themearmada.com/demos/boxia/send-email.php" id="contact-form" class="form-horizontal" role="form">
-                            <div class="form-group">
-                                <label for="name" class="col-12  col-lg-2  control-label">Name:</label>
-                                <div class="col-12  col-lg-10">
-                                    <input type="text" class="form-control" name="name" id="name">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="email" class="col-12  col-lg-2  control-label">Email:</label>
-                                <div class="col-12  col-lg-10">
-                                    <input type="email" class="form-control" name="email" id="email">
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label for="message" class="col-12  col-lg-2  control-label">Message:</label>
-                                <div class="col-12  col-lg-10">
-                                    <textarea class="form-control" rows="7" name="message" id="message"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <div class="col-12  col-lg-2">&nbsp;</div>
-                                <div class="col-12  col-lg-10">
-                                    <button type="submit" class="btn btn-secondary btn-lg btn-full">Send</button>
-                                </div>
-                            </div>
-                        </form><!-- /comment form -->
-                    </div><!--End Col 8-->
-
-                    <div class="col-sm-4">
-                        <h3 class="white">Hours</h3>
-                        <p><strong>Monday-Friday:</strong> 9am to 7pm <br><strong>Saturday:</strong> 9am to 2pm <br><strong>Sunday:</strong> Closed</p>
-
-                        <br />
-                        <h3 class="white">Additional Info</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-
-                        <br />
-                        <h3 class="white">Find Us At</h3>
-                        <ul class="list-inline social">
-                            <li class="wow fadeIn animated" data-wow-delay="0.3s"><a href="http://www.twitter.com/themearmada"><i class="fa fa-twitter fa-2x"></i></a></li>
-                            <li class="wow fadeIn animated" data-wow-delay="0.6s"><a href="http://www.dribbble.com/themearmada"><i class="fa fa-dribbble fa-2x"></i></a></li>
-                            <li class="wow fadeIn animated" data-wow-delay="0.9s"><a href="#"><i class="fa fa-facebook fa-2x"></i></a></li>
-                            <li class="wow fadeIn animated" data-wow-delay="1.2s"><a href="#"><i class="fa fa-github fa-2x"></i></a></li>
-                        </ul>
-                    </div><!--End Col 4-->
-                </div><!--End Row-->
-
-            </div>
-        </section>
-
-        <section id="footer">
-            <div class="container">
                 <div class="row">
-                    <div class="col-sm-12 text-center">
-                        <img src="@Url.Content("~/Content/img/boxia-icon.png")" alt="Boxia Icon">
-                        <p><small>Copyright  Theme Armada. All rights reserved.</small></p>
+                    <div class="col-sm-5">
+
+                        <div class="form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Login</h3>
+                                    <p>Ingrese usuario y contraseña:</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-key"></i>
+                                </div>
+                            </div>
+                            <div class="form-bottom">
+                                <form role="form" action="" method="post" class="login-form">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-username">Usuario o correo</label>
+                                        <input type="text" name="form-username" placeholder="Usuario o correo" class="form-username form-control" id="form-username">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-password">Contraseña</label>
+                                        <input type="password" name="form-password" placeholder="Contraseña" class="form-password form-control" id="form-password">
+                                    </div>
+                                    <button type="submit" class="btn">Login</button>
+                                </form>
+                            </div>
+                        </div>
+
+                        <div class="social-login">
+                            <h3>o</h3>
+                            <div class="social-login-buttons">
+                                <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+                                    <i class="fa fa-facebook"></i> Facebook
+                                </a>
+                                <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
+                                    <i class="fa fa-google-plus"></i> Google Plus
+                                </a>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="col-sm-1 middle-border"></div>
+                    <div class="col-sm-1"></div>
+
+                    <div class="col-sm-5">
+
+                        <div class="form-box">
+                            <div class="form-top">
+                                <div class="form-top-left">
+                                    <h3>Registrarse</h3>
+                                    <p>Ingrese sus datos</p>
+                                </div>
+                                <div class="form-top-right">
+                                    <i class="fa fa-pencil"></i>
+                                </div>
+                            </div>
+                            <div class="form-bottom">
+
+                                @using (Html.BeginForm("registrarUsuario", "HomeControler", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                                {
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-first-name">Usuario</label>
+                                        @*<input type="text" name="form-first-name" placeholder="Nombre" class="form-first-name form-control" id="form-first-name">*@
+                                        @Html.EditorFor(x =>x.usuario , new { htmlAttributes = new { @placeholder = "Nombre" ,@class = "form-first-name form-control",@name = "form-first-name", @id = "form-first-name" } })
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-last-name">Apellido</label>
+                                        @Html.EditorFor(x => x.clave, new { htmlAttributes = new { @placeholder = "Clave", @class = "form-password-name form-control", @name = "form-first-name", @id = "form-first-name" } })
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-email">Email</label>
+                                        
+                                        @Html.EditorFor(x => x.correo, new { htmlAttributes = new { @placeholder = "Correo", @class = "form-email form-control", @name = "form-email", @id = "form-email" } })
+                                    </div>
+
+                                    <button type="submit" class="btn">Registrame</button>
+                                }
+
+                                @*<form role="form" action="" method="post" class="registration-form">
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-first-name">Nombre</label>
+                                        <input type="text" name="form-first-name" placeholder="Nombre" class="form-first-name form-control" id="form-first-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-last-name">Apellido</label>
+                                        <input type="text" name="form-last-name" placeholder="Apellido" class="form-last-name form-control" id="form-last-name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="sr-only" for="form-email">Email</label>
+                                        <input type="text" name="form-email" placeholder="Email" class="form-email form-control" id="form-email">
+                                    </div>
+
+                                    <button type="submit" class="btn">Registrame</button>
+                                </form>*@
+                            </div>
+                        </div>
+
                     </div>
                 </div>
+
             </div>
-        </section>
-
-    </div><!--End Wrapper-->
-
-    <a href="#" class="scrollToTop"><i class="fa fa-chevron-up"></i></a>
-
-    <!-- ADD Switcher -->
-    <div class="demo_changer">
-        <div class="demo-icon"><i class="fa fa-cog fa-2x"></i></div>
-        <div class="form_holder">
-            <div class="line"></div>
-            <p>CHOOSE YOUR COLOR</p>
-
-            <p>This plugin uses cookies. Choose a predefined color scheme here.</p>
-
-            <div class="predefined_styles">
-                <a href="#" rel="blue" class="styleswitch"><img src="img/switcher/blue.jpg" alt=""></a>
-                <a href="#" rel="green" class="styleswitch"><img src="img/switcher/green.jpg" alt=""></a>
-                <a href="#" rel="orange" class="styleswitch"><img src="img/switcher/orange.jpg" alt=""></a>
-                <a href="#" rel="pink" class="styleswitch"><img src="img/switcher/pink.jpg" alt=""></a>
-                <a href="#" rel="purple" class="styleswitch"><img src="img/switcher/purple.jpg" alt=""></a>
-                <a href="#" rel="red" class="styleswitch"><img src="img/switcher/red.jpg" alt=""></a>
-                <a href="#" rel="teal" class="styleswitch"><img src="img/switcher/teal.jpg" alt=""></a>
-                <a href="#" rel="yellow" class="styleswitch"><img src="img/switcher/yellow.jpg" alt=""></a>
-            </div>
-            <span><a rel="stylesheet" class="styleswitch" href="loginc392.html?default=true">RESET STYLE</a></span>
-            <div class="line"></div>
         </div>
+
     </div>
-    <!-- END Switcher -->
-    <!-- Javascript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="../../../ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="@Url.Content("~/Content/js/jquery-1.11.0.min.js")" ><\/script>')</script>
-    <script src="@Url.Content("~/Content/js/bootstrap.min.js")"></script>
-    <script src="@Url.Content("~/Content/js/wow.min.js")"></script>
-    <script src="@Url.Content("~/Content/js/jquery.isotope.min.js")"></script>
-    <script src="@Url.Content("~/Content/js/jquery.validate.min.js")"></script>
-    <script src="@Url.Content("~/Content/js/fswit.js")"></script>
-    <script src="@Url.Content("~/Content/js/main.js")"></script>
 
+    <!-- Javascript -->
+    <script src="@Url.Content("~/Content/js/jquery-1.11.1.min.js")"></script>
+    <script src="@Url.Content("~/Content/bootstrap/js/bootstrap.min.js")"></script>
+   <script src="@Url.Content("~/Content/js/jquery.backstretch.min.js")"></script>
+    <script src="@Url.Content("~/Content/js/scripts.js")"></script>
 
+    <!--[if lt IE 10]>
+        <script src="assets/js/placeholder.js"></script>
+    <![endif]-->
 
+    <div class="backstretch" style="left: 0px; top: 0px; overflow: hidden;
+ margin: 0px; padding: 0px; height: 755px; width: 857px; z-index: -999999;
+  position: fixed;"><img src="assets/img/backgrounds/1.jpg" style="position:
+     absolute; margin: 0px; padding: 0px; border: none; width: 1132.5px; height:
+                    755px; max-height: none; max-width: none; z-index: -999999;
+                            left: -137.75px; top: 0px;"><img src="@Url.Content("~/Content/img/backgrounds/1.jpg")" style="position: absolute; margin: 0px; padding: 0px; border: none; width: 1132.5px; height: 755px; max-height: none; max-width: none; z-index: -999999; left: -137.75px; top: 0px;"></div>
 </body>
-<!-- Mirrored from www.themearmada.com/demos/boxia/login.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 03 Jun 2016 14:45:19 GMT -->
-</html>s
-
+</html>
