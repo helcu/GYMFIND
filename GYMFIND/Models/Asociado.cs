@@ -18,7 +18,8 @@ namespace GYMFIND.Models
         public string Usuario { get; set; }
         public string Clave { get; set; }
         public int EstablecimientoID { get; set; }
-        public byte[] Foto { get; set; }
+        public string Rol { get; set; }
+        public string Foto { get; set; }
     
         public virtual Establecimiento Establecimiento { get; set; }
     }

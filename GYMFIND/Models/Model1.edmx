@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="AdministradorID" />
           </Key>
-          <Property Name="AdministradorID" Type="int" Nullable="false" />
+          <Property Name="AdministradorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Usuario" Type="varchar" MaxLength="50" />
           <Property Name="Clave" Type="varchar" MaxLength="50" />
         </EntityType>
@@ -17,17 +17,19 @@
           <Key>
             <PropertyRef Name="AsociadoID" />
           </Key>
-          <Property Name="AsociadoID" Type="int" Nullable="false" />
+          <Property Name="AsociadoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EstablecimientoID" Type="int" Nullable="false" />
-          <Property Name="Foto" Type="image" Nullable="false" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Foto" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
-        <EntityType Name="Carrito">
+        <EntityType Name="Categoria">
           <Key>
-            <PropertyRef Name="CarritoId" />
+            <PropertyRef Name="CategoriaID" />
           </Key>
-          <Property Name="CarritoId" Type="int" Nullable="false" />
+          <Property Name="CategoriaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -37,8 +39,9 @@
           <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Foto" Type="image" Nullable="false" />
           <Property Name="IDApi" Type="varchar" MaxLength="50" />
+          <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Foto" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -49,7 +52,7 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
             <PropertyRef Name="ClienteID" />
             <PropertyRef Name="QR" />
           </Key>
-          <Property Name="CompraID" Type="int" Nullable="false" />
+          <Property Name="CompraID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PlanID" Type="int" Nullable="false" />
           <Property Name="ClienteID" Type="int" Nullable="false" />
           <Property Name="QR" Type="image" Nullable="false" />
@@ -58,25 +61,25 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
           <Key>
             <PropertyRef Name="EstablecimientoID" />
           </Key>
-          <Property Name="EstablecimientoID" Type="int" Nullable="false" />
+          <Property Name="EstablecimientoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Direccion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RUC" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Latitud" Type="decimal" Precision="18" Scale="7" Nullable="false" />
           <Property Name="Longitud" Type="decimal" Precision="18" Scale="7" Nullable="false" />
           <Property Name="Portal" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Imagen" Type="image" Nullable="false" />
+          <Property Name="imagen" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Planes">
           <Key>
             <PropertyRef Name="PlanID" />
           </Key>
-          <Property Name="PlanID" Type="int" Nullable="false" />
+          <Property Name="PlanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Nombre" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Descripcion" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Costo" Type="float" Nullable="false" />
           <Property Name="EstablecimientoID" Type="int" Nullable="false" />
-          <Property Name="Tipo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="categoriaID" Type="int" Nullable="false" />
         </EntityType>
         <Association Name="FK_Asociado_Establecimiento">
           <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="1" />
@@ -114,6 +117,18 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Planes_Categoria">
+          <End Role="Categoria" Type="Self.Categoria" Multiplicity="1" />
+          <End Role="Planes" Type="Self.Planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaID" />
+            </Principal>
+            <Dependent Role="Planes">
+              <PropertyRef Name="categoriaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Planes_Establecimiento">
           <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="1" />
           <End Role="Planes" Type="Self.Planes" Multiplicity="*" />
@@ -129,7 +144,7 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
         <EntityContainer Name="GYMModelStoreContainer">
           <EntitySet Name="Administrador" EntityType="Self.Administrador" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Asociado" EntityType="Self.Asociado" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Carrito" EntityType="Self.Carrito" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categoria" EntityType="Self.Categoria" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Cliente" EntityType="Self.Cliente" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Establecimiento" EntityType="Self.Establecimiento" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Planes" EntityType="Self.Planes" Schema="dbo" store:Type="Tables" />
@@ -153,6 +168,10 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
             <End Role="Planes" EntitySet="Planes" />
             <End Role="Compra" EntitySet="Compra" />
           </AssociationSet>
+          <AssociationSet Name="FK_Planes_Categoria" Association="Self.FK_Planes_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Planes" EntitySet="Planes" />
+          </AssociationSet>
           <AssociationSet Name="FK_Planes_Establecimiento" Association="Self.FK_Planes_Establecimiento">
             <End Role="Establecimiento" EntitySet="Establecimiento" />
             <End Role="Planes" EntitySet="Planes" />
@@ -165,7 +184,7 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
         <EntityContainer Name="GYMEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Administrador" EntityType="GYMModel.Administrador" />
           <EntitySet Name="Asociado" EntityType="GYMModel.Asociado" />
-          <EntitySet Name="Carrito" EntityType="GYMModel.Carrito" />
+          <EntitySet Name="Categoria" EntityType="GYMModel.Categoria" />
           <EntitySet Name="Cliente" EntityType="GYMModel.Cliente" />
           <EntitySet Name="Establecimiento" EntityType="GYMModel.Establecimiento" />
           <EntitySet Name="Planes" EntityType="GYMModel.Planes" />
@@ -173,6 +192,10 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
           <AssociationSet Name="FK_Asociado_Establecimiento" Association="GYMModel.FK_Asociado_Establecimiento">
             <End Role="Establecimiento" EntitySet="Establecimiento" />
             <End Role="Asociado" EntitySet="Asociado" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Planes_Categoria" Association="GYMModel.FK_Planes_Categoria">
+            <End Role="Categoria" EntitySet="Categoria" />
+            <End Role="Planes" EntitySet="Planes" />
           </AssociationSet>
           <AssociationSet Name="FK_Compra_Cliente" Association="GYMModel.FK_Compra_Cliente">
             <End Role="Cliente" EntitySet="Cliente" />
@@ -191,7 +214,7 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
           <Key>
             <PropertyRef Name="AdministradorID" />
           </Key>
-          <Property Name="AdministradorID" Type="Int32" Nullable="false" />
+          <Property Name="AdministradorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
@@ -199,18 +222,21 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
           <Key>
             <PropertyRef Name="AsociadoID" />
           </Key>
-          <Property Name="AsociadoID" Type="Int32" Nullable="false" />
+          <Property Name="AsociadoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstablecimientoID" Type="Int32" Nullable="false" />
-          <Property Name="Foto" Type="Binary" Nullable="false" />
+          <Property Name="Rol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Foto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Establecimiento" Relationship="GYMModel.FK_Asociado_Establecimiento" FromRole="Asociado" ToRole="Establecimiento" />
         </EntityType>
-        <EntityType Name="Carrito">
+        <EntityType Name="Categoria">
           <Key>
-            <PropertyRef Name="CarritoId" />
+            <PropertyRef Name="CategoriaID" />
           </Key>
-          <Property Name="CarritoId" Type="Int32" Nullable="false" />
+          <Property Name="CategoriaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Planes" Relationship="GYMModel.FK_Planes_Categoria" FromRole="Categoria" ToRole="Planes" />
         </EntityType>
         <EntityType Name="Cliente">
           <Key>
@@ -220,22 +246,23 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
           <Property Name="Usuario" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Foto" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
           <Property Name="IDApi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Rol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Foto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Compra" Relationship="GYMModel.FK_Compra_Cliente" FromRole="Cliente" ToRole="Compra" />
         </EntityType>
         <EntityType Name="Establecimiento">
           <Key>
             <PropertyRef Name="EstablecimientoID" />
           </Key>
-          <Property Name="EstablecimientoID" Type="Int32" Nullable="false" />
+          <Property Name="EstablecimientoID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Direccion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RUC" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Latitud" Type="Decimal" Nullable="false" Precision="18" Scale="7" />
           <Property Name="Longitud" Type="Decimal" Nullable="false" Precision="18" Scale="7" />
           <Property Name="Portal" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Imagen" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Name="imagen" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Asociado" Relationship="GYMModel.FK_Asociado_Establecimiento" FromRole="Establecimiento" ToRole="Asociado" />
           <NavigationProperty Name="Planes" Relationship="GYMModel.FK_Planes_Establecimiento" FromRole="Establecimiento" ToRole="Planes" />
         </EntityType>
@@ -243,12 +270,13 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
           <Key>
             <PropertyRef Name="PlanID" />
           </Key>
-          <Property Name="PlanID" Type="Int32" Nullable="false" />
+          <Property Name="PlanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Nombre" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Costo" Type="Double" Nullable="false" />
           <Property Name="EstablecimientoID" Type="Int32" Nullable="false" />
-          <Property Name="Tipo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="categoriaID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Categoria" Relationship="GYMModel.FK_Planes_Categoria" FromRole="Planes" ToRole="Categoria" />
           <NavigationProperty Name="Establecimiento" Relationship="GYMModel.FK_Planes_Establecimiento" FromRole="Planes" ToRole="Establecimiento" />
           <NavigationProperty Name="Compra" Relationship="GYMModel.FK_Compra_Planes" FromRole="Planes" ToRole="Compra" />
         </EntityType>
@@ -259,7 +287,7 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
             <PropertyRef Name="ClienteID" />
             <PropertyRef Name="QR" />
           </Key>
-          <Property Name="CompraID" Type="Int32" Nullable="false" />
+          <Property Name="CompraID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="PlanID" Type="Int32" Nullable="false" />
           <Property Name="ClienteID" Type="Int32" Nullable="false" />
           <Property Name="QR" Type="Binary" Nullable="false" MaxLength="Max" FixedLength="false" />
@@ -275,6 +303,18 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
             </Principal>
             <Dependent Role="Asociado">
               <PropertyRef Name="EstablecimientoID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Planes_Categoria">
+          <End Type="GYMModel.Categoria" Role="Categoria" Multiplicity="1" />
+          <End Type="GYMModel.Planes" Role="Planes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categoria">
+              <PropertyRef Name="CategoriaID" />
+            </Principal>
+            <Dependent Role="Planes">
+              <PropertyRef Name="categoriaID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -314,7 +354,7 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -333,6 +373,7 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
             <EntityTypeMapping TypeName="GYMModel.Asociado">
               <MappingFragment StoreEntitySet="Asociado">
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
                 <ScalarProperty Name="EstablecimientoID" ColumnName="EstablecimientoID" />
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="Usuario" ColumnName="Usuario" />
@@ -340,18 +381,20 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Carrito">
-            <EntityTypeMapping TypeName="GYMModel.Carrito">
-              <MappingFragment StoreEntitySet="Carrito">
-                <ScalarProperty Name="CarritoId" ColumnName="CarritoId" />
+          <EntitySetMapping Name="Categoria">
+            <EntityTypeMapping TypeName="GYMModel.Categoria">
+              <MappingFragment StoreEntitySet="Categoria">
+                <ScalarProperty Name="Nombre" ColumnName="Nombre" />
+                <ScalarProperty Name="CategoriaID" ColumnName="CategoriaID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="Cliente">
             <EntityTypeMapping TypeName="GYMModel.Cliente">
               <MappingFragment StoreEntitySet="Cliente">
-                <ScalarProperty Name="IDApi" ColumnName="IDApi" />
                 <ScalarProperty Name="Foto" ColumnName="Foto" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="IDApi" ColumnName="IDApi" />
                 <ScalarProperty Name="Correo" ColumnName="Correo" />
                 <ScalarProperty Name="Clave" ColumnName="Clave" />
                 <ScalarProperty Name="Usuario" ColumnName="Usuario" />
@@ -362,7 +405,7 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
           <EntitySetMapping Name="Establecimiento">
             <EntityTypeMapping TypeName="GYMModel.Establecimiento">
               <MappingFragment StoreEntitySet="Establecimiento">
-                <ScalarProperty Name="Imagen" ColumnName="Imagen" />
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
                 <ScalarProperty Name="Portal" ColumnName="Portal" />
                 <ScalarProperty Name="Longitud" ColumnName="Longitud" />
                 <ScalarProperty Name="Latitud" ColumnName="Latitud" />
@@ -376,7 +419,7 @@ warning 6002: The table/view 'GYM.dbo.Compra' does not have a primary key define
           <EntitySetMapping Name="Planes">
             <EntityTypeMapping TypeName="GYMModel.Planes">
               <MappingFragment StoreEntitySet="Planes">
-                <ScalarProperty Name="Tipo" ColumnName="Tipo" />
+                <ScalarProperty Name="categoriaID" ColumnName="categoriaID" />
                 <ScalarProperty Name="EstablecimientoID" ColumnName="EstablecimientoID" />
                 <ScalarProperty Name="Costo" ColumnName="Costo" />
                 <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />

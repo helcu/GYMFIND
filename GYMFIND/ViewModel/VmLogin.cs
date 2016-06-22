@@ -13,6 +13,7 @@ namespace GYMFIND.ViewModel
         public String clave { get; set; }
         public String correo { get; set; }
         public byte[] imagen { get; set; }
+        public String rol { get; set; }
 
 
 

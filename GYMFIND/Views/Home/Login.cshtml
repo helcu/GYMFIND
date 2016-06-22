@@ -1,5 +1,7 @@
 ﻿
 @model GYMFIND.ViewModel.VmLogin
+  
+
 
 @{
     ViewBag.Title = "Login";
@@ -54,17 +56,20 @@
                                 </div>
                             </div>
                             <div class="form-bottom">
-                                <form role="form" action="" method="post" class="login-form">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="form-username">Usuario o correo</label>
-                                        <input type="text" name="form-username" placeholder="Usuario o correo" class="form-username form-control" id="form-username">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="form-password">Contraseña</label>
-                                        <input type="password" name="form-password" placeholder="Contraseña" class="form-password form-control" id="form-password">
-                                    </div>
-                                    <button type="submit" class="btn">Login</button>
-                                </form>
+                                @*<form role="form" action="" method="post" class="login-form">*@
+                                    <form role="form" method="post" action="@Url.Action("login")">
+                                        <div class="form-group">
+                                            <label class="sr-only" for="form-username">Usuario o correo</label>
+                                            @*<input type="text" name="form-username" placeholder="Usuario o correo" class="form-username form-control" id="form-username">*@
+                                            @Html.EditorFor(x => x.usuario, new { htmlAttributes = new {@type="text", @placeholder = "Usuario", @class = "form-username form-control", @name = "form-username", @id = "form-username" } })
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="sr-only" for="form-password">Contraseña</label>
+                                            @*<input type="password" name="form-password" placeholder="Contraseña" class="form-password form-control" id="form-password">*@
+                                            @Html.EditorFor(x => x.clave, new { htmlAttributes = new { @type = "password", @placeholder = "contraseña", @class = "form-password form-control", @name = "form-password", @id = "form-password" } })
+                                        </div>
+                                        <button type="submit" class="btn">Login</button>
+                                    </form>
                             </div>
                         </div>
 
@@ -99,43 +104,44 @@
                             </div>
                             <div class="form-bottom">
 
-                                @using (Html.BeginForm("registrarUsuario", "HomeControler", FormMethod.Post, new { enctype = "multipart/form-data" }))
-                                {
+                                @*@using (Html.BeginForm("registrarUsuario", "HomeController", FormMethod.Post ))
+                                {*@
+                                <form role="form" method="post" action="@Url.Action("registrarUsuario")">
                                     <div class="form-group">
                                         <label class="sr-only" for="form-first-name">Usuario</label>
                                         @*<input type="text" name="form-first-name" placeholder="Nombre" class="form-first-name form-control" id="form-first-name">*@
-                                        @Html.EditorFor(x =>x.usuario , new { htmlAttributes = new { @placeholder = "Nombre" ,@class = "form-first-name form-control",@name = "form-first-name", @id = "form-first-name" } })
+                                        @Html.EditorFor(x => x.usuario, new { htmlAttributes = new { @type = "text", @placeholder = "Nombre", @class = "form-first-name form-control", @name = "form-first-name", @id = "form-first-name" } })
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-last-name">Apellido</label>
-                                        @Html.EditorFor(x => x.clave, new { htmlAttributes = new { @placeholder = "Clave", @class = "form-password-name form-control", @name = "form-first-name", @id = "form-first-name" } })
+                                        @Html.EditorFor(x => x.clave, new { htmlAttributes = new { @type = "password", @placeholder = "Clave", @class = "form-password-name form-control", @name = "form-first-name", @id = "form-first-name" } })
                                     </div>
                                     <div class="form-group">
                                         <label class="sr-only" for="form-email">Email</label>
-                                        
-                                        @Html.EditorFor(x => x.correo, new { htmlAttributes = new { @placeholder = "Correo", @class = "form-email form-control", @name = "form-email", @id = "form-email" } })
+
+                                        @Html.EditorFor(x => x.correo, new { htmlAttributes = new { @type = "text", @placeholder = "Correo", @class = "form-email form-control", @name = "form-email", @id = "form-email" } })
                                     </div>
 
                                     <button type="submit" class="btn">Registrame</button>
-                                }
+                                    @*}*@
+                                </form>
+                                    @*<form role="form" action="" method="post" class="registration-form">
+                <div class="form-group">
+                    <label class="sr-only" for="form-first-name">Nombre</label>
+                    <input type="text" name="form-first-name" placeholder="Nombre" class="form-first-name form-control" id="form-first-name">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="form-last-name">Apellido</label>
+                    <input type="text" name="form-last-name" placeholder="Apellido" class="form-last-name form-control" id="form-last-name">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="form-email">Email</label>
+                    <input type="text" name="form-email" placeholder="Email" class="form-email form-control" id="form-email">
+                </div>
 
-                                @*<form role="form" action="" method="post" class="registration-form">
-                                    <div class="form-group">
-                                        <label class="sr-only" for="form-first-name">Nombre</label>
-                                        <input type="text" name="form-first-name" placeholder="Nombre" class="form-first-name form-control" id="form-first-name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="form-last-name">Apellido</label>
-                                        <input type="text" name="form-last-name" placeholder="Apellido" class="form-last-name form-control" id="form-last-name">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="sr-only" for="form-email">Email</label>
-                                        <input type="text" name="form-email" placeholder="Email" class="form-email form-control" id="form-email">
-                                    </div>
-
-                                    <button type="submit" class="btn">Registrame</button>
-                                </form>*@
-                            </div>
+                <button type="submit" class="btn">Registrame</button>
+            </form>*@
+</div>
                         </div>
 
                     </div>
