@@ -37,7 +37,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>@ViewBag.title </title>
+    <title>@ViewBag.Title </title>
     <!-- Bootstrap core CSS -->
     <link href="@Url.Content("~/Content/css/bootstrap.min.css")" rel="stylesheet">
     <link href="@Url.Content("~/Content/fonts/css/font-awesome.min.css")" rel="stylesheet">
@@ -163,6 +163,9 @@
                                 <li>
                                     <a><i class="fa fa-table"></i>Administrar Planes <span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu" style="display: none">
+                                        <li>
+                                            <a href="@Url.Action("listarPlan")">Listar</a>
+                                        </li>
                                         <li>
                                             <a href="@Url.Action("registrarPlan")">Registrar</a>
                                         </li>

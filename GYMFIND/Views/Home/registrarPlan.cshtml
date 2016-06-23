@@ -46,7 +46,7 @@
 
                 <form role="form" id="form" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" method="post" action="@Url.Action("registrarPlan")">
                    
-                     @*@Html.HiddenFor(x => x.establecimientoID)*@
+                     @Html.HiddenFor(x => x.planID)
 
                     <div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
@@ -80,7 +80,7 @@
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de plan</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             @*<input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" data-parsley-id="5653">*@
-                            @Html.DropDownListFor(x => x.categoria ,new SelectList( Model.lista,"CategoriaID","Nombre") )
+                            @Html.DropDownListFor(x => x.categoria ,new SelectList( Model.lista,"CategoriaID","Nombre"), "[-Seleccionar-]", new { @class = "form-control" })
                             @Html.ValidationMessageFor(x => x.categoria)
                             <ul class="parsley-errors-list" id="parsley-id-5653"></ul>
                         </div>
@@ -121,5 +121,3 @@
         </div>
     </div>
 </div>
-
-

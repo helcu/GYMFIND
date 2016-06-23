@@ -14,6 +14,7 @@ namespace GYMFIND.Controllers
 {
     public class HomeController : Controller
     {
+        GYMEntities context = new GYMEntities();
         public ActionResult Index()
         {
             return View();
@@ -120,12 +121,13 @@ namespace GYMFIND.Controllers
             
         }
 
-        public ActionResult registrarPlan() {
-
-            VmRegistrarPlan vmRegistrar = new VmRegistrarPlan();
-
+        public ActionResult registrarPlan(int? planId) {
             GYMEntities context = new GYMEntities();
-             vmRegistrar.lista = context.Categoria.ToList();
+            VmRegistrarPlan vmRegistrar = new VmRegistrarPlan();
+            vmRegistrar.Fill(context, planId);
+
+            //GYMEntities context = new GYMEntities();
+             //vmRegistrar.lista = context.Categoria.ToList();
        
            
           //Session["establecimiento"] = ((Asociado)Session["objUsuario"]).Establecimiento;
@@ -139,12 +141,18 @@ namespace GYMFIND.Controllers
 
             try
             {
-                GYMEntities context = new GYMEntities();
+                
+                Planes obj = null;
+                if (vmRegistrarPlan.planID.HasValue)
+                {
+                    obj = context.Planes.FirstOrDefault(x => x.PlanID == vmRegistrarPlan.planID);
+                }
+                else {
 
-
-                Planes obj = new Planes();
-
-                context.Planes.Add(obj);
+                    obj = new Planes();
+                    context.Planes.Add(obj);
+                }
+                
 
                 obj.Nombre = vmRegistrarPlan.nombre;
                 obj.Descripcion = vmRegistrarPlan.descripcion;
@@ -159,13 +167,23 @@ namespace GYMFIND.Controllers
             }
             catch (Exception)
             {
-
-                return View("dashboard");
+                vmRegistrarPlan.Fill(context,null);
+                TryUpdateModel(vmRegistrarPlan);
+                return View(vmRegistrarPlan);
             }
 
           
 
             
+        }
+
+        public ActionResult listarPlan() {
+
+            VmListarPlan vmRegistrarPlan = new VmListarPlan();
+            
+            vmRegistrarPlan.fill(((Asociado)Session["objUsuario"]).EstablecimientoID);
+
+            return View(vmRegistrarPlan);
         }
 
     }
