@@ -25,8 +25,8 @@ namespace GYMFIND.Models
         public string Nombre { get; set; }
         public string Direccion { get; set; }
         public string RUC { get; set; }
-        public decimal Latitud { get; set; }
-        public decimal Longitud { get; set; }
+        public string Latitud { get; set; }
+        public string Longitud { get; set; }
         public string Portal { get; set; }
         public string imagen { get; set; }
     

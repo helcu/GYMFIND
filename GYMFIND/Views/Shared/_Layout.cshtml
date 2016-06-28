@@ -89,7 +89,7 @@
                                 @if (rol == "C")
                                 {
                                 <li>
-                                    <a><i class="fa fa-home"></i> Gimnacios @*<span class="fa fa-chevron-down"></span>*@</a>
+                                    <a href="@Url.Action("gimnacioMapa")" ><i class="fa fa-crosshairs"></i> Gimnacios Cercanos@*<span class="fa fa-chevron-down"></span>*@</a>
                                     @*<ul class="nav child_menu" style="display: none">
                                         <li>
                                             <a href="index.html">Dashboard</a>
@@ -103,7 +103,21 @@
                                     </ul>*@
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-edit"></i> Planes y ofertas @*<span class="fa fa-chevron-down"></span>*@</a>
+                                    <a href="@Url.Action("gimnaciosBusqueda")"><i class="fa fa-binoculars"></i> Busqueda Gimnacios@*<span class="fa fa-chevron-down"></span>*@</a>
+                                    @*<ul class="nav child_menu" style="display: none">
+                                            <li>
+                                                <a href="index.html">Dashboard</a>
+                                            </li>
+                                            <li>
+                                                <a href="index2.html">Dashboard2</a>
+                                            </li>
+                                            <li>
+                                                <a href="index3.html">Dashboard3</a>
+                                            </li>
+                                        </ul>*@
+                                </li>
+                                <li>
+                                    <a><i class="fa fa-bell"></i> Planes y ofertas @*<span class="fa fa-chevron-down"></span>*@</a>
                                     @*<ul class="nav child_menu" style="display: none">
                                         <li>
                                             <a href="form.html">General Form</a>
@@ -126,7 +140,7 @@
                                     </ul>*@
                                 </li>
                                 <li>
-                                    <a><i class="fa fa-desktop"></i> Planes adquiridos @*<span class="fa fa-chevron-down"></span>*@</a>
+                                    <a href="@Url.Action("planesAdquiridos")"><i class="fa fa-credit-card"></i> Planes adquiridos @*<span class="fa fa-chevron-down"></span>*@</a>
                                     @*<ul class="nav child_menu" style="display: none">
                                         <li>
                                             <a href="general_elements.html">General Elements</a>

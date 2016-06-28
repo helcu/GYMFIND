@@ -12,14 +12,8 @@ namespace GYMFIND.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Compra
+    public partial class Carrito
     {
-        public int CompraID { get; set; }
-        public int PlanID { get; set; }
-        public int ClienteID { get; set; }
-        public string QR { get; set; }
-    
-        public virtual Cliente Cliente { get; set; }
-        public virtual Planes Planes { get; set; }
+        public int CarritoId { get; set; }
     }
 }

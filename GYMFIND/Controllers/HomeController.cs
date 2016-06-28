@@ -8,7 +8,10 @@ using GYMFIND.Models;
 using System.IO;
 
 using System.Drawing;
-using System.Drawing.Imaging; 
+using System.Drawing.Imaging;
+using BarcodeLib;
+using QRCoder;
+
 
 namespace GYMFIND.Controllers
 {
@@ -70,7 +73,7 @@ namespace GYMFIND.Controllers
 
                     Session["objUsuario"] = cliente;
                 Session["rol"] = "C";
-                    return RedirectToAction("dashboard");
+                    return RedirectToAction("gimnacioMapa");
 
                 
 
@@ -185,6 +188,117 @@ namespace GYMFIND.Controllers
 
             return View(vmRegistrarPlan);
         }
+        [HttpPost]
+        public ActionResult listarPlan(VmListarPlan vmRegistrarPlan)
+        {
 
+           
+
+            vmRegistrarPlan.fill(((Asociado)Session["objUsuario"]).EstablecimientoID);
+
+            return View(vmRegistrarPlan);
+        }
+        public ActionResult gimnacioMapa() {
+
+            VmGimnacioMapa vmGimnacionMapa = new VmGimnacioMapa();
+
+            vmGimnacionMapa.fill();
+
+
+            return View(vmGimnacionMapa);
+        }
+        public ActionResult gimnaciosBusqueda() {
+
+            VmGimnaciosBusqueda vmGimnaciosBusqueda = new VmGimnaciosBusqueda();
+            vmGimnaciosBusqueda.fill();
+
+
+            return View(vmGimnaciosBusqueda);
+        }
+        [HttpPost]
+        public ActionResult gimnaciosBusqueda(VmGimnaciosBusqueda vmGimnaciosBusqueda)
+        {
+
+            
+            vmGimnaciosBusqueda.fill();
+
+
+            return View(vmGimnaciosBusqueda);
+        }
+
+        public ActionResult establecimientoInfo(int establecimientoID) {
+
+            VmEstablecimientoInfo vmEsablecimientoInfo = new VmEstablecimientoInfo();
+
+            vmEsablecimientoInfo.establecimientoID = establecimientoID;
+
+            vmEsablecimientoInfo.fill();
+
+            return View(vmEsablecimientoInfo);
+        }
+
+        public ActionResult compraPlan(int planID) {
+            VmCompraPlan vmComprarPlan = new VmCompraPlan();
+
+            vmComprarPlan.fill(planID);
+
+            return View(vmComprarPlan);
+        }
+        [HttpPost]
+        public ActionResult compraPlan(VmCompraPlan vmComprarPlan)
+        {
+            try
+            {
+                Compra compra = new Compra();
+                compra.ClienteID = ((Cliente)Session["objUsuario"]).ClienteID;
+                compra.PlanID = vmComprarPlan.planID;
+                //insertar codigo de generacion de cosigo QR
+                //BarcodeLib. qrbarcode = new BarcodeLib.Barcode();
+
+                //qrbarcode.
+                //BarCode qrcode = new BarCode();
+                //qrcode.Symbology = KeepAutomation.Barcode.Symbology.QRCode;
+
+
+                PlanPagadoViewModel objViewModel = new PlanPagadoViewModel();
+                Cliente objCliente = (Cliente)Session["objCliente"];
+                string qrString = "Cliente ID: " + objCliente.IDCliente + " Nombre: " + objCliente.Nombre + " " + objCliente.Apellido + "\n" + "Plan ID: " + idPlan + " Nombre: " + nombrePlan;
+                QRCodeGenerator qrc = new QRCodeGenerator();
+                QRCodeGenerator.QRCode qc = qrc.CreateQrCode(qrString, QRCodeGenerator.ECCLevel.Q);
+                Bitmap bmp = qc.GetGraphic(20);
+                MemoryStream ms = new MemoryStream();
+                bmp.Save(ms, ImageFormat.Png);
+                byte[] bt = ms.ToArray();
+
+
+
+                compra.QR = "codigo :v";
+
+                context.Compra.Add(compra);
+
+                context.SaveChanges();
+
+                return RedirectToAction("gimnacioMapa");
+            }
+            catch (Exception)
+            {
+
+                return View();
+            }
+
+        }
+
+            public ActionResult planesAdquiridos() {
+
+            VmPlanesAdquiridos VmPlanesAdquiridos = new VmPlanesAdquiridos();
+
+            VmPlanesAdquiridos.fill(((Cliente)Session["objUsuario"]).ClienteID);
+
+
+
+
+            return View(VmPlanesAdquiridos);
+        }
+           
+        }
     }
-}

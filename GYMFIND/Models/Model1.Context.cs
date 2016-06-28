@@ -27,10 +27,11 @@ namespace GYMFIND.Models
     
         public virtual DbSet<Administrador> Administrador { get; set; }
         public virtual DbSet<Asociado> Asociado { get; set; }
+        public virtual DbSet<Carrito> Carrito { get; set; }
         public virtual DbSet<Categoria> Categoria { get; set; }
         public virtual DbSet<Cliente> Cliente { get; set; }
+        public virtual DbSet<Compra> Compra { get; set; }
         public virtual DbSet<Establecimiento> Establecimiento { get; set; }
         public virtual DbSet<Planes> Planes { get; set; }
-        public virtual DbSet<Compra> Compra { get; set; }
     }
 }
