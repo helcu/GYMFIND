@@ -225,10 +225,12 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModel\ViewModelRegistrarAsociado.cs" />
     <Compile Include="ViewModel\VmCompraPlan.cs" />
     <Compile Include="ViewModel\VmEstablecimientoInfo.cs" />
     <Compile Include="ViewModel\VmGimnacioMapa.cs" />
     <Compile Include="ViewModel\VmGimnaciosBusqueda.cs" />
+    <Compile Include="ViewModel\VmListarAsociados.cs" />
     <Compile Include="ViewModel\VmListarPlan.cs" />
     <Compile Include="ViewModel\VmLogin.cs" />
     <Compile Include="ViewModel\VmPlanesAdquiridos.cs" />
@@ -303,6 +305,8 @@
     <Content Include="Views\Home\establecimientoInfo.cshtml" />
     <Content Include="Views\Home\compraPlan.cshtml" />
     <Content Include="Views\Home\planesAdquiridos.cshtml" />
+    <Content Include="Views\Home\listarAsociados.cshtml" />
+    <Content Include="Views\Home\registrarAsociados.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

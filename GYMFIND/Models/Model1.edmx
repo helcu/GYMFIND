@@ -47,7 +47,7 @@
           <Property Name="Correo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="IDApi" Type="varchar" MaxLength="50" />
           <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Foto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Foto" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Compra">
           <Key>
@@ -81,6 +81,7 @@
           <Property Name="Costo" Type="float" Nullable="false" />
           <Property Name="EstablecimientoID" Type="int" Nullable="false" />
           <Property Name="categoriaID" Type="int" Nullable="false" />
+          <Property Name="imagen" Type="varchar" MaxLength="100" />
         </EntityType>
         <Association Name="FK_Asociado_Establecimiento">
           <End Role="Establecimiento" Type="Self.Establecimiento" Multiplicity="1" />
@@ -250,7 +251,7 @@
           <Property Name="Correo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="IDApi" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Rol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Foto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Foto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Compra" Relationship="GYMModel.FK_Compra_Cliente" FromRole="Cliente" ToRole="Compra" />
         </EntityType>
         <EntityType Name="Compra">
@@ -289,6 +290,7 @@
           <Property Name="Costo" Type="Double" Nullable="false" />
           <Property Name="EstablecimientoID" Type="Int32" Nullable="false" />
           <Property Name="categoriaID" Type="Int32" Nullable="false" />
+          <Property Name="imagen" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Categoria" Relationship="GYMModel.FK_Planes_Categoria" FromRole="Planes" ToRole="Categoria" />
           <NavigationProperty Name="Compra" Relationship="GYMModel.FK_Compra_Planes" FromRole="Planes" ToRole="Compra" />
           <NavigationProperty Name="Establecimiento" Relationship="GYMModel.FK_Planes_Establecimiento" FromRole="Planes" ToRole="Establecimiento" />
@@ -435,6 +437,7 @@
           <EntitySetMapping Name="Planes">
             <EntityTypeMapping TypeName="GYMModel.Planes">
               <MappingFragment StoreEntitySet="Planes">
+                <ScalarProperty Name="imagen" ColumnName="imagen" />
                 <ScalarProperty Name="categoriaID" ColumnName="categoriaID" />
                 <ScalarProperty Name="EstablecimientoID" ColumnName="EstablecimientoID" />
                 <ScalarProperty Name="Costo" ColumnName="Costo" />

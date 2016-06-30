@@ -43,14 +43,14 @@ namespace GYMFIND.Controllers
             return View();
 
         }
-
+        //[Authorize]
         public ActionResult dashboard() {
 
 
             return View();
         }
 
-
+       
         [HttpPost]
         public ActionResult login(VmLogin vmLogin) {
 
@@ -62,8 +62,16 @@ namespace GYMFIND.Controllers
                 if (cliente == null)
                 {
                     Asociado asociado = context.Asociado.FirstOrDefault(x => x.Usuario == vmLogin.usuario && x.Clave == vmLogin.clave);
-                    if(asociado == null)
-                    return View(vmLogin);
+                    if (asociado == null)
+                    {
+                        Administrador administrador = context.Administrador.FirstOrDefault(x=>x.Usuario == vmLogin.usuario&& x.Clave==vmLogin.clave);
+                        if (administrador == null)
+                         return View(vmLogin);
+                        Session["objUsuario"] = administrador;
+                        Session["rol"] = "D";
+                        return RedirectToAction("dashboard");
+
+                    }
 
                     Session["objUsuario"] = asociado;
                     Session["rol"] = "A";
@@ -86,7 +94,7 @@ namespace GYMFIND.Controllers
 
              }
 
-
+       
         [HttpPost]
         public ActionResult registrarUsuario(VmLogin vmLogin)
         {
@@ -97,7 +105,7 @@ namespace GYMFIND.Controllers
                 cliente.Clave = vmLogin.clave;
                 cliente.Correo = vmLogin.correo;
                 cliente.IDApi = null;
-                cliente.Foto = "~/Content/images/user.png";
+                cliente.Foto = "/Content/images/user.png";
                 //string imageFile = System.Web.HttpContext.Current.Server.MapPath("~/Content/images/user.png");
                 //var srcImage = Image.FromFile(imageFile);
                 //var stream = new MemoryStream();
@@ -110,7 +118,8 @@ namespace GYMFIND.Controllers
                 context.Cliente.Add(cliente);
                 context.SaveChanges();
                 Session["objUsuario"] = cliente;
-                return RedirectToAction("dashboard");
+                Session["rol"] = "C";
+                return RedirectToAction("gimnacioMapa");
                 
 
                 
@@ -140,7 +149,7 @@ namespace GYMFIND.Controllers
             return View(vmRegistrar);
         }
         [HttpPost]
-        public ActionResult registrarPlan(VmRegistrarPlan vmRegistrarPlan) {
+        public ActionResult registrarPlan( VmRegistrarPlan vmRegistrarPlan,HttpPostedFileBase file ) {
 
             try
             {
@@ -149,13 +158,39 @@ namespace GYMFIND.Controllers
                 if (vmRegistrarPlan.planID.HasValue)
                 {
                     obj = context.Planes.FirstOrDefault(x => x.PlanID == vmRegistrarPlan.planID);
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/img"), fileName);
+                        file.SaveAs(path);
+                        obj.imagen = fileName;
+                    }
+                    //else
+                    //{
+
+                    //    obj.imagen = "portfolio5.jpg";
+                    //}
                 }
                 else {
 
                     obj = new Planes();
                     context.Planes.Add(obj);
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/img"), fileName);
+                        file.SaveAs(path);
+                        obj.imagen = fileName;
+                    }
+                    else
+                    {
+
+                        obj.imagen = "portfolio5.jpg";
+                    }
+
                 }
-                
 
                 obj.Nombre = vmRegistrarPlan.nombre;
                 obj.Descripcion = vmRegistrarPlan.descripcion;
@@ -259,17 +294,27 @@ namespace GYMFIND.Controllers
                 //BarCode qrcode = new BarCode();
                 //qrcode.Symbology = KeepAutomation.Barcode.Symbology.QRCode;
 
+                
+                //QRCodeGenerator qrc = new QRCodeGenerator();
+                //QRCodeGenerator.QRCode qc = qrc.CreateQrCode(compra.PlanID.ToString(), QRCodeGenerator.ECCLevel.Q);
+                //Bitmap bmp = qc.GetGraphic(20);
+                
+                //MemoryStream ms = new MemoryStream();
+              
+                //bmp.Save(ms, ImageFormat.Png);
+                
+                //byte[] bt = ms.ToArray();
 
-                PlanPagadoViewModel objViewModel = new PlanPagadoViewModel();
-                Cliente objCliente = (Cliente)Session["objCliente"];
-                string qrString = "Cliente ID: " + objCliente.IDCliente + " Nombre: " + objCliente.Nombre + " " + objCliente.Apellido + "\n" + "Plan ID: " + idPlan + " Nombre: " + nombrePlan;
-                QRCodeGenerator qrc = new QRCodeGenerator();
-                QRCodeGenerator.QRCode qc = qrc.CreateQrCode(qrString, QRCodeGenerator.ECCLevel.Q);
-                Bitmap bmp = qc.GetGraphic(20);
-                MemoryStream ms = new MemoryStream();
-                bmp.Save(ms, ImageFormat.Png);
-                byte[] bt = ms.ToArray();
+                //Image i = new Image();
+               
+                //var filename = Path.GetFileName(bt.FileName);
+                //var path = Path.Combine(Server.MapPath("~/Content/image/"), filename);
+                //file.SaveAs(path);
+                //tyre.Url = filename;
 
+                //_db.EventModels.AddObject(eventmodel);
+                //_db.SaveChanges();
+                //return RedirectToAction("Index");
 
 
                 compra.QR = "codigo :v";
@@ -299,6 +344,94 @@ namespace GYMFIND.Controllers
 
             return View(VmPlanesAdquiridos);
         }
-           
+
+//respnde una imagen conelid de peticion y genera un codigo q a paritr de esto
+
+        public ActionResult getQr(int id) {
+
+            string text = id.ToString();
+
+            QRCodeGenerator qrc = new QRCodeGenerator();
+            QRCodeGenerator.QRCode qc = qrc.CreateQrCode(text, QRCodeGenerator.ECCLevel.Q);
+            Bitmap bmp = qc.GetGraphic(20);
+
+            MemoryStream ms = new MemoryStream();
+
+            bmp.Save(ms, ImageFormat.Png);
+
+            byte[] bt = ms.ToArray();
+            return File(bt, "image/png");
+
         }
+
+        [HttpPost]
+        public ActionResult loginFB(VmLogin vmLogin) {
+
+            Cliente cliente = context.Cliente.FirstOrDefault(x=>x.IDApi==vmLogin.FbID);
+
+            if (cliente==null)
+            {
+                cliente = new Cliente();
+                cliente.Usuario = vmLogin.usuario;
+                cliente.Clave = "";
+                cliente.Correo = vmLogin.correo;
+                cliente.IDApi = vmLogin.FbID;
+                cliente.Foto = vmLogin.imagen;
+                //string imageFile = System.Web.HttpContext.Current.Server.MapPath("~/Content/images/user.png");
+                //var srcImage = Image.FromFile(imageFile);
+                //var stream = new MemoryStream();
+                //srcImage.Save(stream, ImageFormat.Png);
+                //cliente.Foto= stream.ToArray();
+                cliente.Rol = "User";
+
+                GYMEntities context = new GYMEntities();
+
+                context.Cliente.Add(cliente);
+                context.SaveChanges();
+                Session["objUsuario"] = cliente;
+                Session["rol"] = "C";
+                return RedirectToAction("gimnacioMapa");
+
+            }
+
+            Session["objUsuario"] = cliente;
+            Session["rol"] = "C";
+            return RedirectToAction("gimnacioMapa");
+
+
+            //return View();
+        }
+
+
+        public ActionResult cerrarSesion() {
+
+
+
+
+            Session.Clear();
+            return RedirectToAction("login");
+
+        }
+
+        public ActionResult listarAsociados() {
+            VmListarAsociados vmListarAsociados = new VmListarAsociados();
+
+            vmListarAsociados.fill();
+
+            return View(vmListarAsociados);
+        }
+
+
+        public ActionResult registrarAsociados(int? AsociadoID)
+        {
+            ViewModelRegistrarAsociado viewModelRegistrarAsociado = new ViewModelRegistrarAsociado();
+
+            viewModelRegistrarAsociado.fill(context, AsociadoID);
+
+            return View(viewModelRegistrarAsociado);
+        }
+
+
+
     }
+}

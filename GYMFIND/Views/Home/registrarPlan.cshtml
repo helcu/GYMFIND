@@ -44,8 +44,11 @@
             </div>
             <div class="x_content">
 
-                <form role="form" id="form" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" method="post" action="@Url.Action("registrarPlan")">
-                   
+                @*<form role="form" id="form" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" method="post" action="@Url.Action("registrarPlan")">*@
+
+                   @using (Html.BeginForm("registrarPlan", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-horizontal form-label-left" }))
+                   {
+
                      @Html.HiddenFor(x => x.planID)
 
                     <div class="form-group">
@@ -54,7 +57,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             @*<input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0445">*@
-                            @Html.EditorFor(x=>x.nombre, new { htmlAttributes = new { @required = "required" ,@type = "text", @placeholder = "Nombre de plan", @class = "form-control col-md-7 col-xs-12", @id = "nombre" } })
+                            @Html.EditorFor(x => x.nombre, new { htmlAttributes = new { @required = "required", @type = "text", @placeholder = "Nombre de plan", @class = "form-control col-md-7 col-xs-12", @id = "nombre" } })
                             <ul class="parsley-errors-list" id="parsley-id-0445"></ul>
                         </div>
                     </div>
@@ -64,7 +67,7 @@
                         </label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             @*<input type="text" id="last-name" name="last-name" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="1408">*@
-                            @Html.TextAreaFor(x=> x.descripcion, new { htmlAttributes = new {  @type = "text",@id="descripcion",@name="descripcion",@required="required",@class= "form-control col-md-7 col-xs-12" } } )
+                            @Html.TextAreaFor(x => x.descripcion, new { htmlAttributes = new { @type = "text", @id = "descripcion", @name = "descripcion", @required = "required", @class = "form-control col-md-7 col-xs-12" } })
                             <ul class="parsley-errors-list" id="parsley-id-1408"></ul>
                         </div>
                     </div>
@@ -72,7 +75,7 @@
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Costo</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             @*<input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" data-parsley-id="5653">*@
-                            @Html.EditorFor(x => x.costo, new { htmlAttributes = new { @type="text",@id="costo",@class= "form-control col-md-3 col-xs-12",@name="costo" } } )
+                            @Html.EditorFor(x => x.costo, new { htmlAttributes = new { @type = "text", @id = "costo", @class = "form-control col-md-3 col-xs-12", @name = "costo" } })
                             <ul class="parsley-errors-list" id="parsley-id-5653"></ul>
                         </div>
                     </div>
@@ -80,11 +83,21 @@
                         <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Tipo de plan</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
                             @*<input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" data-parsley-id="5653">*@
-                            @Html.DropDownListFor(x => x.categoria ,new SelectList( Model.lista,"CategoriaID","Nombre"), "[-Seleccionar-]", new { @class = "form-control" })
+                            @Html.DropDownListFor(x => x.categoria, new SelectList(Model.lista, "CategoriaID", "Nombre"), "[-Seleccionar-]", new { @class = "form-control" })
                             @Html.ValidationMessageFor(x => x.categoria)
                             <ul class="parsley-errors-list" id="parsley-id-5653"></ul>
                         </div>
+                        
                     </div>
+                    <div class="form-group">
+                        <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Imagen Promocional</label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <input type="file" name="file" />
+                            <ul class="parsley-errors-list" id="parsley-id-5653"></ul>
+                        </div>
+
+                    </div>
+                    
                     @*<div class="form-group">
                         <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
                         <div class="col-md-6 col-sm-6 col-xs-12">
@@ -114,7 +127,8 @@
                         </div>
                     </div>
 
-                </form>
+                @*</form>*@
+                    }
 
 
             </div>

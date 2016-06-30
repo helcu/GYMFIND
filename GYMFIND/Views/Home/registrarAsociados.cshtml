@@ -1,0 +1,123 @@
+﻿@model GYMFIND.ViewModel.ViewModelRegistrarAsociado
+@{
+    ViewBag.Title = "Registrar Asociados";
+}
+
+<div class="row">
+
+    <div class="col-md-12 col-sm-12 col-xs-12">
+        <div class="x_panel" style="height:600px;">
+            <div class="x_title">
+                
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-wrench"></i></a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li>
+                                <a href="#">Settings 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Settings 2</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a class="close-link"><i class="fa fa-close"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix">
+
+
+                </div>
+            </div>
+            <div class="x_content">
+
+                @*<form role="form" id="form" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" method="post" action="@Url.Action("registrarPlan")">*@
+
+                @using (Html.BeginForm("registrarPlan", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class ="form-horizontal form-label-left" }))
+                {
+
+                    @Html.HiddenFor(x => x.asociadoID)
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                            Usuario <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            @*<input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0445">*@
+                            @Html.EditorFor(x => x.usuario, new { htmlAttributes = new { @required = "required", @type = "text", @placeholder = "Usuario", @class = "form-control col-md-7 col-xs-12", @id = "nombre" } })
+                            <ul class="parsley-errors-list" id="parsley-id-0445"></ul>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3 col-sm-3 col-xs-12" for="first-name">
+                            Contraseña <span class="required">*</span>
+                        </label>
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            @*<input type="text" id="first-name" required="required" class="form-control col-md-7 col-xs-12" data-parsley-id="0445">*@
+                            @Html.EditorFor(x => x.clave, new { htmlAttributes = new { @required = "required", @type = "password", @placeholder = "Contraseña", @class = "form-control col-md-7 col-xs-12", @id = "nombre" } })
+                            <ul class="parsley-errors-list" id="parsley-id-0445"></ul>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">Establecimiento</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                @*<input id="middle-name" class="form-control col-md-7 col-xs-12" type="text" name="middle-name" data-parsley-id="5653">*@
+                                @Html.DropDownListFor(x => x.establecimientoId, new SelectList(Model.lista, "EstablecimientoID", "Nombre"), "[-Seleccionar-]", new { @class = "form-control" })
+                                @Html.ValidationMessageFor(x => x.establecimientoId)
+                                <ul class="parsley-errors-list" id="parsley-id-5653"></ul>
+                            </div>
+
+                        </div>
+                        <div class="form-group">
+                            <label for="middle-name" class="control-label col-md-3 col-sm-3 col-xs-12">foto:</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="file" name="file" />
+                                <ul class="parsley-errors-list" id="parsley-id-5653"></ul>
+                            </div>
+
+                        </div>
+
+                        @*<div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">Gender</label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <div id="gender" class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                            <input type="radio" name="gender" value="male" data-parsley-multiple="gender" data-parsley-id="3193"> &nbsp; Male &nbsp;
+                                        </label><ul class="parsley-errors-list" id="parsley-id-multiple-gender"></ul>
+                                        <label class="btn btn-primary active" data-toggle-class="btn-primary" data-toggle-passive-class="btn-default">
+                                            <input type="radio" name="gender" value="female" checked="" data-parsley-multiple="gender" data-parsley-id="3193"> Female
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label col-md-3 col-sm-3 col-xs-12">
+                                    Date Of Birth <span class="required">*</span>
+                                </label>
+                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                    <input id="birthday" class="date-picker form-control col-md-7 col-xs-12" required="required" type="text" data-parsley-id="6578"><ul class="parsley-errors-list" id="parsley-id-6578"></ul>
+                                </div>
+                            </div>*@
+                        <div class="ln_solid"></div>
+                        <div class="form-group">
+                            <div class="col-md-6 col-sm-6 col-xs-12 col-md-offset-3">
+                                <button type="reset" class="btn btn-primary">Cancelar</button>
+                                <button type="submit" class="btn btn-success">Registrar</button>
+                            </div>
+                        </div>
+
+                        @*</form>*@
+                        }
+
+
+                    </div>
+        </div>
+    </div>
+</div>
+
+
+

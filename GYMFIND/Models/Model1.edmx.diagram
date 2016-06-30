@@ -5,14 +5,14 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="573e5ab85f5141aeb697e58c40b3c55f" Name="Diagram1">
-        <EntityTypeShape EntityType="GYMModel.Administrador" Width="1.5" PointX="5.75" PointY="8.75" />
-        <EntityTypeShape EntityType="GYMModel.Asociado" Width="1.5" PointX="3" PointY="8.375" />
-        <EntityTypeShape EntityType="GYMModel.Carrito" Width="1.5" PointX="5.75" PointY="2.75" />
+        <EntityTypeShape EntityType="GYMModel.Administrador" Width="1.5" PointX="5.75" PointY="8.625" />
+        <EntityTypeShape EntityType="GYMModel.Asociado" Width="1.5" PointX="3" PointY="8.5" />
+        <EntityTypeShape EntityType="GYMModel.Carrito" Width="1.5" PointX="5.75" PointY="2.625" />
         <EntityTypeShape EntityType="GYMModel.Categoria" Width="1.5" PointX="0.75" PointY="1.25" />
         <EntityTypeShape EntityType="GYMModel.Cliente" Width="1.5" PointX="3" PointY="0.75" />
         <EntityTypeShape EntityType="GYMModel.Compra" Width="1.5" PointX="5.25" PointY="5" />
         <EntityTypeShape EntityType="GYMModel.Establecimiento" Width="1.5" PointX="0.75" PointY="4.5" />
-        <EntityTypeShape EntityType="GYMModel.Planes" Width="1.5" PointX="3" PointY="4.625" />
+        <EntityTypeShape EntityType="GYMModel.Planes" Width="1.5" PointX="3" PointY="4.5" />
         <AssociationConnector Association="GYMModel.FK_Asociado_Establecimiento" />
         <AssociationConnector Association="GYMModel.FK_Planes_Categoria" />
         <AssociationConnector Association="GYMModel.FK_Compra_Cliente" />

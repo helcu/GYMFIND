@@ -76,7 +76,7 @@
                         <div class="social-login">
                             <h3>o</h3>
                             <div class="social-login-buttons">
-                                <a class="btn btn-link-1 btn-link-1-facebook" href="#">
+                                <a class="btn btn-link-1 btn-link-1-facebook" href="#" onclick="loginfb()">
                                     <i class="fa fa-facebook"></i> Facebook
                                 </a>
                                 <a class="btn btn-link-1 btn-link-1-google-plus" href="#">
@@ -151,7 +151,68 @@
         </div>
 
     </div>
+    <form id="miform" name="miform" role="form" method="post" action="@Url.Action("loginFB")">
+        @Html.HiddenFor(x => x.FbID, new { @name = "XXIDRS", @id = "XXIDRS" })
+        @*@Html.HiddenFor(x => x.usuarioobjCliente.TIPORS, new { @name = "XXTipoRS", @id = "XXTipoRS" })*@
+        @Html.HiddenFor(x => x.usuario, new { @name = "XXnombre", @id = "XXnombre" })
+        @*@Html.HiddenFor(x => x.objCliente.Apellido, new { @name = "XXapellido", @id = "XXapellido" })*@
+        @Html.HiddenFor(x => x.correo, new { @name = "XXcorreo", @id = "XXcorreo" })
+        @Html.HiddenFor(x => x.imagen, new { @name = "XXImgRS", @id = "XXImgRS" })
+    </form>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '485611161643393',
+                xfbml: true,
+                version: 'v2.6'
+            });
+        };
 
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) { return; }
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        /*...........................*/
+        //FUNCIONES PARA ACCEDER AL API
+        //compartir en fb
+        function compartirfb() {
+            FB.ui(
+                {
+                    method: 'share',
+                    href: 'https://developers.facebook.com/docs/'
+                },
+                //respuesta
+                function (response) {
+                    if (response && !response.error_message) alert('Posting completed.'); else alert('Error while posting.');
+                }
+                )
+        };
+
+        //logeo en fb
+        function loginfb() {
+            FB.login(function (response) {
+                if (response.status === 'connected') {
+                    FB.api('/me', 'GET', { fields: 'id,email,first_name,last_name' },
+                function (response) {
+
+                    document.getElementById("XXIDRS").value = response.id;
+                    document.getElementById("XXnombre").value = response.first_name;
+                    //document.getElementById("XXapellido").value = response.last_name;
+                    //document.getElementById("XXTipoRS").value = "Facebook";
+                    document.getElementById("XXcorreo").value = response.email;
+                    document.getElementById("XXImgRS").value = "http://graph.facebook.com/" + response.id + "/picture?type=large";
+                    document.getElementById("miform").submit();
+                });
+                    console.log('Logged in.');
+                }
+            }, { scope: 'public_profile', scope: 'email' });
+        }
+
+    </script>
     <!-- Javascript -->
     <script src="@Url.Content("~/Content/js/jquery-1.11.1.min.js")"></script>
     <script src="@Url.Content("~/Content/bootstrap/js/bootstrap.min.js")"></script>

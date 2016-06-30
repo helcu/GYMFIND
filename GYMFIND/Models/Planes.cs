@@ -26,6 +26,7 @@ namespace GYMFIND.Models
         public double Costo { get; set; }
         public int EstablecimientoID { get; set; }
         public int categoriaID { get; set; }
+        public string imagen { get; set; }
     
         public virtual Categoria Categoria { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

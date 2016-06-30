@@ -243,6 +243,7 @@
                 </div>
                 <div class="modal-body">
                     <p>@p.compraID</p>
+                    <img src='@Url.Action("getQr", new { id = p.compraID})' />
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
