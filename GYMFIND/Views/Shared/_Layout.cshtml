@@ -229,30 +229,21 @@
                                             <li>
                                                 <a href="@Url.Action("registrarAsociados")">Registrar</a>
                                             </li>
-                                            @*<li>
-                        <a href="tables_dynamic.html">Editar</a>
-                    </li>*@
+                                            
                                         </ul>
                                     </li>
                                     <li>
-                                        <a><i class="fa fa-bar-chart-o"></i> administrar Establecimientos @*<span class="fa fa-chevron-down"></span>*@</a>
-                                        @*<ul class="nav child_menu" style="display: none">
-                    <li>
-                        <a href="chartjs.html">Chart JS</a>
-                    </li>
-                    <li>
-                        <a href="chartjs2.html">Chart JS2</a>
-                    </li>
-                    <li>
-                        <a href="morisjs.html">Moris JS</a>
-                    </li>
-                    <li>
-                        <a href="echarts.html">ECharts </a>
-                    </li>
-                    <li>
-                        <a href="other_charts.html">Other Charts </a>
-                    </li>
-                </ul>*@
+                                        <a><i class="fa fa-table"></i>Administrar Establecimientos <span class="fa fa-chevron-down"></span></a>
+                                        <ul class="nav child_menu" style="display: none">
+                                            <li>
+                                                <a href="@Url.Action("listarEstablecimiento")">Listar</a>
+                                            </li>
+                                            <li>
+                                                <a href="@Url.Action("agregarEstablecimiento")">Registrar</a>
+                                            </li>
+
+                                        </ul>
+                       
                                     </li>
                                 }
                             </ul>

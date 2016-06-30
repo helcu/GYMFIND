@@ -234,6 +234,7 @@
     <Compile Include="ViewModel\VmListarPlan.cs" />
     <Compile Include="ViewModel\VmLogin.cs" />
     <Compile Include="ViewModel\VmPlanesAdquiridos.cs" />
+    <Compile Include="ViewModel\VmRegistrarEstablecimiento.cs" />
     <Compile Include="ViewModel\VmRegistrarPlan.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -307,6 +308,8 @@
     <Content Include="Views\Home\planesAdquiridos.cshtml" />
     <Content Include="Views\Home\listarAsociados.cshtml" />
     <Content Include="Views\Home\registrarAsociados.cshtml" />
+    <Content Include="Views\Home\listarEstablecimiento.cshtml" />
+    <Content Include="Views\Home\agregarEstablecimiento.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -37,7 +37,7 @@
 
                 @*<form role="form" id="form" data-parsley-validate="" class="form-horizontal form-label-left" novalidate="" method="post" action="@Url.Action("registrarPlan")">*@
 
-                @using (Html.BeginForm("registrarPlan", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class ="form-horizontal form-label-left" }))
+                @using (Html.BeginForm("registrarAsociados", "Home", FormMethod.Post, new { enctype = "multipart/form-data", @class ="form-horizontal form-label-left" }))
                 {
 
                     @Html.HiddenFor(x => x.asociadoID)

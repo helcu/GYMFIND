@@ -22,7 +22,7 @@
           <Property Name="Clave" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="EstablecimientoID" Type="int" Nullable="false" />
           <Property Name="Rol" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Foto" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Foto" Type="varchar" MaxLength="100" Nullable="false" />
         </EntityType>
         <EntityType Name="Carrito">
           <Key>
@@ -224,7 +224,7 @@
           <Property Name="Clave" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EstablecimientoID" Type="Int32" Nullable="false" />
           <Property Name="Rol" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Foto" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Foto" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Establecimiento" Relationship="GYMModel.FK_Asociado_Establecimiento" FromRole="Asociado" ToRole="Establecimiento" />
         </EntityType>
         <EntityType Name="Carrito">

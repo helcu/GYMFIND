@@ -431,7 +431,163 @@ namespace GYMFIND.Controllers
             return View(viewModelRegistrarAsociado);
         }
 
+        [HttpPost]
+        public ActionResult registrarAsociados(ViewModelRegistrarAsociado viewModelRegistrarAsociado, HttpPostedFileBase file)
+        {
 
+
+            try
+            {
+
+                Asociado obj = null;
+                if (viewModelRegistrarAsociado.asociadoID.HasValue)
+                {
+                    obj = context.Asociado.FirstOrDefault(x => x.AsociadoID == viewModelRegistrarAsociado.asociadoID);
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+                        file.SaveAs(path);
+                        obj.Foto = "~/Content/images/" + fileName;
+                    }
+                    //else
+                    //{
+
+                    //    obj.imagen = "portfolio5.jpg";
+                    //}
+                }
+                else
+                {
+
+                    obj = new Asociado();
+                    context.Asociado.Add(obj);
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+                        file.SaveAs(path);
+                        obj.Foto = "~/Content/images/" + fileName;
+                    }
+                    else
+                    {
+
+                        obj.Foto = "~/Content/images/user.png";
+                    }
+
+                }
+
+                obj.Usuario = viewModelRegistrarAsociado.usuario;
+                obj.Clave = viewModelRegistrarAsociado.clave;
+                obj.EstablecimientoID = viewModelRegistrarAsociado.establecimientoId;
+                obj.Rol = "A";
+                
+                
+
+                context.SaveChanges();
+
+                return RedirectToAction("listarAsociados");
+            }
+            catch (Exception)
+            {
+                viewModelRegistrarAsociado.fill(context, null);
+                TryUpdateModel(viewModelRegistrarAsociado);
+                return View(viewModelRegistrarAsociado);
+            }
+        }
+
+        public ActionResult listarEstablecimiento()
+        {
+
+            VmGimnaciosBusqueda vmGimnaciosBusqueda = new VmGimnaciosBusqueda();
+            vmGimnaciosBusqueda.fill();
+
+
+            return View(vmGimnaciosBusqueda);
+        }
+
+        public ActionResult agregarEstablecimiento(int? establecimientoID) {
+
+            VmRegistrarEstablecimiento vmRegistrarEstablecimiento = new VmRegistrarEstablecimiento();
+
+            vmRegistrarEstablecimiento.fill(context,establecimientoID);
+
+            return View(vmRegistrarEstablecimiento);
+
+
+
+
+        }
+        [HttpPost]
+        public ActionResult agregarEstablecimiento(VmRegistrarEstablecimiento vmRegistrarEstablecimiento, HttpPostedFileBase file)
+        {
+
+
+            try
+            {
+
+                Establecimiento obj = null;
+                if (vmRegistrarEstablecimiento.establecimientoID.HasValue)
+                {
+                    obj = context.Establecimiento.FirstOrDefault(x => x.EstablecimientoID == vmRegistrarEstablecimiento.establecimientoID);
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+                        file.SaveAs(path);
+                        obj.imagen = "~/Content/images/" + fileName;
+                    }
+                    //else
+                    //{
+
+                    //    obj.imagen = "portfolio5.jpg";
+                    //}
+                }
+                else
+                {
+
+                    obj = new Establecimiento();
+                    context.Establecimiento.Add(obj);
+
+                    if (file != null && file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        var path = Path.Combine(Server.MapPath("~/Content/images"), fileName);
+                        file.SaveAs(path);
+                        obj.imagen = "~/Content/images/" + fileName;
+                    }
+                    else
+                    {
+
+                        obj.imagen = "~/Content/images/4.jpg";
+                    }
+
+                }
+
+                obj.Nombre = vmRegistrarEstablecimiento.nombre;
+                obj.Direccion = vmRegistrarEstablecimiento.direccion;
+                obj.RUC = vmRegistrarEstablecimiento.ruc;
+                obj.Latitud = vmRegistrarEstablecimiento.latitud;
+                obj.Longitud = vmRegistrarEstablecimiento.longitud;
+                obj.Portal = vmRegistrarEstablecimiento.portal;
+
+
+
+
+                context.SaveChanges();
+
+                return RedirectToAction("listarEstablecimiento");
+            }
+            catch (Exception)
+            {
+                vmRegistrarEstablecimiento.fill(context, null);
+                TryUpdateModel(vmRegistrarEstablecimiento);
+                return View(vmRegistrarEstablecimiento);
+            }
+
+        }
 
     }
 }
