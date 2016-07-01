@@ -15,7 +15,7 @@
 <div class="col-md-12 col-sm-12 col-xs-12">
     <div class="x_panel">
         <div class="x_title">
-            <h2>Planes <small>Custom design</small></h2>
+            <h2>Planes </h2>
             <ul class="nav navbar-right panel_toolbox">
                 <li>
                     <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -242,7 +242,7 @@
                     <h4 class="modal-title">Codigo QR de Compra</h4>
                 </div>
                 <div class="modal-body">
-                    <p>@p.compraID</p>
+                    @*<p>@p.compraID</p>*@
                     <img src='@Url.Action("getQr", new { id = p.compraID})' />
                 </div>
                 <div class="modal-footer">

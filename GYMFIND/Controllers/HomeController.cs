@@ -75,7 +75,7 @@ namespace GYMFIND.Controllers
 
                     Session["objUsuario"] = asociado;
                     Session["rol"] = "A";
-                    return RedirectToAction("dashboard");
+                    return RedirectToAction("estadoCuenta");
                 }
 
 
@@ -223,6 +223,7 @@ namespace GYMFIND.Controllers
 
             return View(vmRegistrarPlan);
         }
+
         [HttpPost]
         public ActionResult listarPlan(VmListarPlan vmRegistrarPlan)
         {
@@ -317,13 +318,13 @@ namespace GYMFIND.Controllers
                 //return RedirectToAction("Index");
 
 
-                compra.QR = "codigo :v";
+                compra.QR = "codigo";
 
                 context.Compra.Add(compra);
 
                 context.SaveChanges();
 
-                return RedirectToAction("gimnacioMapa");
+                return RedirectToAction("planesAdquiridos");
             }
             catch (Exception)
             {
@@ -358,7 +359,7 @@ namespace GYMFIND.Controllers
             MemoryStream ms = new MemoryStream();
 
             bmp.Save(ms, ImageFormat.Png);
-
+           
             byte[] bt = ms.ToArray();
             return File(bt, "image/png");
 
@@ -587,6 +588,16 @@ namespace GYMFIND.Controllers
                 return View(vmRegistrarEstablecimiento);
             }
 
+        }
+
+
+        public ActionResult estadoCuenta() {
+
+            VmEstadoCuenta vmEstadoCuenta = new VmEstadoCuenta();
+
+            vmEstadoCuenta.fill(((Asociado)Session["objUsuario"]).EstablecimientoID);
+
+            return View(vmEstadoCuenta);
         }
 
     }

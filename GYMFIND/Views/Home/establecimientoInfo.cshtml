@@ -6,7 +6,7 @@
     <div class="">
         <div class="page-title">
             <div class="title_left">
-                <h3>Pricing Tables</h3>
+                <h3>Planes y paquetes</h3>
             </div>
 
             <div class="title_right">
@@ -27,7 +27,7 @@
             <div class="col-md-12 col-sm-12 col-xs-12">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>Pricing Tables Design</h2>
+                        @*<h2>Pricing Tables Design</h2>*@
                         <ul class="nav navbar-right panel_toolbox">
                             <li>
                                 <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
@@ -62,12 +62,14 @@
                                     <div class="col-md-3 col-sm-6 col-xs-12">
                                         <div class="pricing">
                                             <div class="title">
-                                                <h2>@p.Nombre</h2>
+                                                <h2>@p.Categoria.Nombre</h2>
                                                 <h1>$@p.Costo</h1>
+                                                <h2>@p.Nombre</h2>
                                             </div>
                                             <div class="x_content">
                                                 <div class="">
                                                     <div class="pricing_features">
+                                                       
                                                         <i class="fa fa-check text-success"></i> @p.Descripcion
                                                     </div>
                                                 </div>

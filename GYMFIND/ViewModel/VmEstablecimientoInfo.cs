@@ -16,8 +16,12 @@ namespace GYMFIND.ViewModel
         public void fill() {
             GYMEntities context = new GYMEntities();
 
+            var query = context.Planes.AsQueryable();
+            if(!(establecimientoID==-1))
+            query = context.Planes.Where(x => x.EstablecimientoID == establecimientoID);
 
-            lista = context.Planes.Where(x => x.EstablecimientoID == establecimientoID).ToList();
+            lista= query.ToList();
+
 
         }
 
